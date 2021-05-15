@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import {Component, React} from 'react';
+import CardList from './exercise-1/components/card-list/CardList';
+import Search from "./exercise-1/components/search/Search";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            monsters: [],
+            searchField: "",
+        };
+    }
+
+    componentDidMount() {
+        console.log("mounted component");
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => {
+                this.setState({monsters: users});
+                console.log(users)
+            });
+        console.log("All exported");
+
+    }
+    render() {
+        const {monsters, searchField} = this.state;
+        const filtered = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
+        return (
+            <div className='App'>
+                <Search placeholder='search monster'
+                        handleChange={ e => this.setState({searchField: e.target.value})}/>
+                <h1>Monsters In Charge !</h1>
+                <CardList monsters={filtered}/>
+            </div>
+        )
+    }
+
 }
 
 export default App;
