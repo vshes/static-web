@@ -13,6 +13,9 @@ jobs:
       - run: yarn --version
       - run: npm install
       - run: yarn build
-      - run : yarn deploy
+  deploy:
+    steps:
+      - run: gh-pages --version
+      - run: gh-pages -d build
 
 
