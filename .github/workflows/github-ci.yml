@@ -10,7 +10,6 @@ jobs:
       - name: Install and Build
         user: actions/setup-node@v1
         run: |
-          npm install -g yarn
           npm install
           yarn --version
           yarn build
