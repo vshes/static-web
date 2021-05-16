@@ -1,22 +1,21 @@
-name: Monsters-Web
-on:
-  push:
-    branches:
-      - master
+name: Build and Deploy
+on: [push]
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install -g yarn
-      - run: yarn --version
-      - run: npm install
-      - run: yarn build
-  deploy:
-    uses: actions/github-pages-deploy-action@4.1.3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm install -g yarn
+          npm install
+          yarn --version
+          yarn build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
-          branch: gh-pages
-          folder: build
-
-
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
