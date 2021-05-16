@@ -14,7 +14,7 @@ jobs:
       - run: npm install
       - run: yarn build
   deploy:
-    uses: @jamesives/github-pages-deploy-action@4.1.3
+    uses: actions/github-pages-deploy-action@4.1.3
         with:
           branch: gh-pages
           folder: build
