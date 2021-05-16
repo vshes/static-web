@@ -13,8 +13,11 @@ jobs:
       - run: yarn --version
       - run: npm install
       - run: yarn build
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
       - name : deploy
-        uses: @jamesives/github-pages-deploy-action@4.1.3
+        uses: @jamesives/github-pages-deploy-action@v4.1.3
         with:
           branch: gh-pages
           folder: build
